@@ -6,12 +6,31 @@
 /*   By: ccepre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:01:03 by ccepre            #+#    #+#             */
-/*   Updated: 2018/11/22 19:26:41 by ccepre           ###   ########.fr       */
+/*   Updated: 2018/11/23 11:43:32 by ccepre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fillit.h"
+
+char	**tab_cpy(char **tab)
+{
+	char **cpy;
+	int i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	if (!(cpy = (char**)ft_memalloc(sizeof(char*) * (i + 1))))
+		return (NULL);
+	i = -1;
+	while (tab[++i])
+	{
+		if(!(cpy[i] = strdup(tab[i])))
+			return (NULL);
+	}
+	return (cpy);
+}
 
 t_tetri	*lst_new(char **tetri, int index)
 {
@@ -19,7 +38,8 @@ t_tetri	*lst_new(char **tetri, int index)
 
 	if (!(new = (t_tetri*)malloc(sizeof(t_list))))
 		return (NULL);
-	new->tetrimino = tetri;
+	if (!(new->tetrimino = tab_cpy(tetri)))
+		return (NULL);
 	new->index = index;
 	new->next = NULL;
 	return (new);
@@ -36,19 +56,15 @@ void	lst_add_back(t_tetri **lst, t_tetri *new)
 	}
 	if (!(*lst))
 	{
-		printf("NULL\n");
 		*lst = new;
 		(*lst)->next = NULL;
 		return ;
 	}
-	printf("before 2 index : %d\n", (*lst)->index);
-	printf("before 2 address : %p\n", *lst);
 	current = *lst;
 	while (current->next)
 		current = current->next;
 	current->next = new;
 	current->next->next = NULL;
-	printf("pointeur : %p\n", *lst);
 }
 
 void	lst_iter(t_tetri *lst, void (*f)(t_tetri *ielem))

@@ -6,7 +6,7 @@
 /*   By: ccepre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:30:12 by ccepre            #+#    #+#             */
-/*   Updated: 2018/11/22 19:28:12 by ccepre           ###   ########.fr       */
+/*   Updated: 2018/11/23 11:46:14 by ccepre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ char	**create_tetri(char *l0, char *l1, char *l2, char *l3)
 	return (tetri);
 }
 
+void	tab_free(char **tab)
+{
+	int i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
+}
+
 int main()
 {
 	char	**tetri;
@@ -52,21 +62,15 @@ int main()
 		return (-1);
 	if (!(tmp = lst_new(tetri, 0)))
 		return (-1);
+	tab_free(tetri);
 	lst_add_back(lst, tmp);
-	printf("index : %d\n", (*lst)->index);
-	free(tmp);
-	printf("index : %d\n", (*lst)->index);
 	if (!(tetri = create_tetri("##", "##", NULL, NULL)))
 		return (-1);
-//	if (!(tmp = lst_new(tetri, 1)))
-//		return (-1);
-	printf("before index : %d\n", (*lst)->index);
-	printf("before address : %p\n", (*lst));
-	tmp = lst_new(tetri, 1);
-	printf("before index : %d\n", (*lst)->index);
-	printf("before address : %p\n", (*lst));
+	if (!(tmp = lst_new(tetri, 1)))
+		return (-1);
+	tab_free(tetri);
 	lst_add_back(lst, tmp);
-	printf("index : %d\n", (*lst)->index);
-	printf("next : %p\n", (*lst)->next);
+	ft_putendl("Display of the input : \n-------------------");
 	lst_iter(*lst, &print_node);
+	ft_putendl("---------------------");
 }
