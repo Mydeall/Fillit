@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttab.c                                        :+:      :+:    :+:   */
+/*   char_count.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccepre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 14:58:58 by ccepre            #+#    #+#             */
-/*   Updated: 2018/11/27 15:25:18 by anrzepec         ###   ########.fr       */
+/*   Created: 2018/11/28 11:16:09 by ccepre            #+#    #+#             */
+/*   Updated: 2018/11/28 11:16:21 by ccepre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstrtab(char **tab)
+int	char_count(char *s, char c)
 {
-	if (!(tab) || !(*tab))
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	if (s)
 	{
-		ft_putendl("(null)");
-		return ;
+		while (s[i])
+		{
+			if (s[i] == c)
+				count++;
+			i++;
+		}
 	}
-	ft_putstr("{\n");
-	while (*tab)
-	{
-		ft_putchar('|');
-		ft_putstr(*tab);
-		ft_putstr("|\n");
-		tab++;
-	}
-	ft_putstr("}\n");
+	return (count);
 }

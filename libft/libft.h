@@ -6,7 +6,7 @@
 /*   By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/11/22 18:52:56 by ccepre           ###   ########.fr       */
+/*   Updated: 2018/11/28 13:57:41 by ccepre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include "get_next_line.h"
 
 typedef struct		s_list
 {
@@ -153,6 +154,8 @@ int					ft_stralpha(char const *s);
 int					ft_strupper(char const *s);
 
 int					ft_strlower(char const *s);
+
+int					char_count(char *s, char c);
 
 void				ft_putstrtab(char **tab);
 
